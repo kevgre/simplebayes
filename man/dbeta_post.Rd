@@ -4,11 +4,16 @@
 \alias{dbeta_post}
 \title{Sample Posterior Beta PDF}
 \usage{
-dbeta_post(x, successes, sample_size, ..., alpha_prior = 1/2, beta_prior = 1/2)
+dbeta_post(
+  quanitle,
+  successes,
+  sample_size,
+  ...,
+  alpha_prior = 1/2,
+  beta_prior = 1/2
+)
 }
 \arguments{
-\item{x}{vector of quantiles}
-
 \item{successes}{number of success in the binomial experiment}
 
 \item{sample_size}{number of trials in the binomial experiment}
@@ -18,9 +23,11 @@ dbeta_post(x, successes, sample_size, ..., alpha_prior = 1/2, beta_prior = 1/2)
 \item{alpha_prior}{The prior for the alpha parameter}
 
 \item{beta_prior}{The prior for the beta parameter}
+
+\item{quantile}{vector of quantiles}
 }
 \value{
-A vector of probabilities the same length as x
+A vector of probabilities the same length as quantile
 }
 \description{
 \code{dbeta_post()} will sample the posterior beta probability distribution function
