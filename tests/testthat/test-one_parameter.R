@@ -12,3 +12,17 @@ test_that("posterior rbeta works", {
                  tolerance = 0.1)
   })
 })
+
+test_that("gamma functions work", {
+  a_prior <- 1
+  b_prior <- 1
+  x <- sample(1:5, 10, TRUE)
+  expect_equal(dgamma_post(2, x = x, 10, alpha_prior = a_prior, beta_prior = b_prior),
+               dgamma(2, a_prior + sum(x), b_prior + 10))
+  expect_equal(pgamma_post(2, x = x, 10, alpha_prior = a_prior, beta_prior = b_prior),
+               pgamma(2, a_prior + sum(x), b_prior + 10))
+  withr::with_seed(123, {
+    expect_equal(rgamma_post(1, x = x, 10, alpha_prior = a_prior, beta_prior = b_prior),
+                 rgamma(1, a_prior + sum(x), b_prior + 10), tolerance = 0.5)
+  })
+})
