@@ -15,10 +15,10 @@
 #'
 #' @examples
 dbeta_post <- function(
-    quanitle, successes, sample_size, ..., alpha_prior = 1/2, beta_prior = 1/2
+    quantile, successes, sample_size, ..., alpha_prior = 1/2, beta_prior = 1/2
     ) {
   failures <- sample_size - successes
-  stats::dbeta(quantile, shape1 = successes + alpha_prior, shape2 = failures + beta_prior)
+  stats::dbeta(quantile, successes + alpha_prior, failures + beta_prior, ...)
 }
 
 #' Sample from beta CDF
@@ -41,4 +41,12 @@ pbeta_post <- function(
     ) {
   failures <- sample_size - successes
   stats::pbeta(quantile, successes + alpha_prior, failures + beta_prior, ...)
+}
+
+# TODO: update documentation to appear in a single file
+rbeta_post <- function(
+    n, successes, sample_size, ..., alpha_prior = 1/2, beta_prior = 1/2
+) {
+  failures <- sample_size - successes
+  stats::rbeta(n = n, successes + alpha_prior, failures + beta_prior, )
 }
