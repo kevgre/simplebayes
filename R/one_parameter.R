@@ -51,6 +51,7 @@ rbeta_post <- function(
   stats::rbeta(n = n, successes + alpha_prior, failures + beta_prior, )
 }
 
+# TODO: add Jefferies priors
 dgamma_post <- function(quantile, x, sample_size, ..., alpha_prior, beta_prior) {
   x <- sum(x)
   stats::dgamma(quantile, x + alpha_prior, rate = sample_size + beta_prior, ...)
