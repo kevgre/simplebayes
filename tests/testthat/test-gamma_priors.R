@@ -38,3 +38,14 @@ test_that("pgamma_post works", {
   expect_equal(dgamma_post(2, OBS, s_size, "exp", log = TRUE),
                dgamma(2, 1 + sum(OBS), 1 + s_size, log = TRUE))
 })
+
+test_that("rgamma_post works", {
+  s_size <- 10
+  OBS <- sample(1:5, s_size, TRUE)
+  expect_equal(
+    withr::with_seed(
+      123, rgamma_post(2, OBS, s_size, "gamma", alpha_observed = 0.8)
+    ),
+    withr::with_seed(123, rgamma(2, 1 + s_size * 0.8, 1 + sum(OBS)))
+  )
+})
