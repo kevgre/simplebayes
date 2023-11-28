@@ -28,3 +28,13 @@ test_that("dgamma_post works", {
   expect_equal(dgamma_post(2, OBS, s_size, "pois", log = TRUE),
                dgamma(2, 1 + sum(OBS), 1 + s_size, log = TRUE))
 })
+
+test_that("pgamma_post works", {
+  s_size <- 10
+  OBS <- sample(1:5, s_size, TRUE)
+  expect_equal(dgamma_post(2, OBS, s_size, "exp"),
+               dgamma(2, 1 + sum(OBS), 1 + s_size))
+  expect_length(dgamma_post(2:5, OBS, s_size, "exp"), length(2:5))
+  expect_equal(dgamma_post(2, OBS, s_size, "exp", log = TRUE),
+               dgamma(2, 1 + sum(OBS), 1 + s_size, log = TRUE))
+})
