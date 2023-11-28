@@ -57,7 +57,7 @@ dbeta_post <- function(
   post_vals <- update_beta_parameters(
     alpha_prior, beta_prior, likelihood, result, sample_size, failure_rate
     )
-  stats::dbeta(quantile, post_vals[1], post_vals[2])
+  stats::dbeta(quantile, post_vals[1], post_vals[2], ...)
 }
 
 # TODO: Wrote documentation in a way that will reuse documentation from dbeta_post
