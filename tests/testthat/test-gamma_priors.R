@@ -25,4 +25,6 @@ test_that("dgamma_post works", {
   expect_equal(dgamma_post(2, OBS, s_size, "pois"),
                dgamma(2, 1 + sum(OBS), 1 + s_size))
   expect_length(dgamma_post(2:5, OBS, s_size, "pois"), length(2:5))
+  expect_equal(dgamma_post(2, OBS, s_size, "pois", log = TRUE),
+               dgamma(2, 1 + sum(OBS), 1 + s_size, log = TRUE))
 })
