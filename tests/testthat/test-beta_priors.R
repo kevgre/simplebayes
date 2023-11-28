@@ -1,15 +1,15 @@
-test_that("beta posterior computed", {
+test_that("beta paramters updated", {
   expect_equal(
-    compute_beta_posterior_vals(0.5, 0.5, "binom", result = 2, s_size = 10),
+    update_beta_parameters(0.5, 0.5, "binom", result = 2, s_size = 10),
                c(2.5, 8.5))
   expect_equal(
-    compute_beta_posterior_vals(
+    update_beta_parameters(
       0.5, 0.5, "nbinom", result = 2, s_size = 10, f_rate = 0.5
       ),
     c(0.5 + 10 * 0.5, 0.5 + 2)
   )
   expect_equal(
-    compute_beta_posterior_vals(0.5, 0.5, "geometric", result = 2, s_size = 10),
+    update_beta_parameters(0.5, 0.5, "geometric", result = 2, s_size = 10),
     c(0.5 + 10, 0.5 + 2)
   )
 })

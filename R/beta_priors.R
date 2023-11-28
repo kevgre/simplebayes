@@ -1,6 +1,6 @@
 #' Compute Beta Posterior Parameters
 #'
-#' `compute_beta_posterior_vals()` will compute the posterior parameter values
+#' `update_beta_parameters()` will compute the posterior parameter values
 #' for a model with a beta prior.
 #'
 #' @param a_prior The alpha prior value
@@ -15,7 +15,7 @@
 #' @returns A vector of length two where the first value is the alpha parameter
 #' and the second value is the beta parameter.
 #'
-compute_beta_posterior_vals <- function(
+update_beta_parameters <- function(
     a_prior, b_prior, l_hood, ...,
     result = NULL, s_size = NULL, f_rate = NULL) {
   if (l_hood == "binom") {
@@ -52,7 +52,7 @@ compute_beta_posterior_vals <- function(
 #' @examples
 dbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
-  post_vals <- compute_beta_posterior_vals(alpha_prior, beta_prior, likelihood, ...)
+  post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
   dbeta(quantile, post_vals[1], post_vals[2])
 }
 
@@ -60,12 +60,12 @@ dbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior 
 # TODO: update all functions to accept arguments for log and ncp
 pbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
-  post_vals <- compute_beta_posterior_vals(alpha_prior, beta_prior, likelihood, ...)
+  post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
   pbeta(quantile, post_vals[1], post_vals[2])
 }
 
 rbeta_post <- function(n, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
-  post_vals <- compute_beta_posterior_vals(alpha_prior, beta_prior, likelihood, ...)
+  post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
   rbeta(n = n, post_vals[1], post_vals[2])
 }
