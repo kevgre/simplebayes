@@ -57,7 +57,7 @@ dgamma_post <- function(
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
     a_obs = alpha_observed)
-  dgamma(quantile, post_vals[1L], post_vals[2L], ...)
+  stats::dgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
 #' Posterior Gamma CDF
@@ -84,7 +84,7 @@ pgamma_post <- function(
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
     a_obs = alpha_observed)
-  pgamma(quantile, post_vals[1L], post_vals[2L], ...)
+  stats::pgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
 #' Posterior Gamma CDF
@@ -111,5 +111,5 @@ rgamma_post <- function(
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
     a_obs = alpha_observed)
-  rgamma(n = n, post_vals[1L], post_vals[2L], ...)
+  stats::rgamma(n = n, post_vals[1L], post_vals[2L], ...)
 }

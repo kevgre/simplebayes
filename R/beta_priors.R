@@ -53,7 +53,7 @@ update_beta_parameters <- function(
 dbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
   post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
-  dbeta(quantile, post_vals[1], post_vals[2])
+  stats::dbeta(quantile, post_vals[1], post_vals[2])
 }
 
 # TODO: Wrote documentation in a way that will reuse documentation from dbeta_post
@@ -61,11 +61,11 @@ dbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior 
 pbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
   post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
-  pbeta(quantile, post_vals[1], post_vals[2])
+  stats::pbeta(quantile, post_vals[1], post_vals[2])
 }
 
 rbeta_post <- function(n, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
   post_vals <- update_beta_parameters(alpha_prior, beta_prior, likelihood, ...)
-  rbeta(n = n, post_vals[1], post_vals[2])
+  stats::rbeta(n = n, post_vals[1], post_vals[2])
 }
