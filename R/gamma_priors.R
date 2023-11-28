@@ -59,3 +59,30 @@ dgamma_post <- function(
     a_obs = alpha_observed)
   dgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
+
+#' Posterior Gamma CDF
+#'
+#' `pgamma_post()` computes the posterior PDF for a model with a gamma prior.
+#'
+#' @param quantile A vector of quantiles
+#' @param observations The observations from the model
+#' @param sample_size The sample size from the model
+#' @param likelihood The likelihood used
+#' @param ... Pass arguments to pgamma
+#' @param alpha_observed The observed shape parameter
+#' @param alpha_prior The prior shape parameter
+#' @param beta_prior The prior rate parameter
+#'
+#' @returns A vector of PDF results that is the same length as quantile.
+#' @export
+#'
+#' @examples
+pgamma_post <- function(
+    quantile, observations, sample_size, likelihood, ...,
+    alpha_observed = NULL, alpha_prior = 1, beta_prior = 1) {
+  rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
+  post_vals <- update_gamma_parameters(
+    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
+    a_obs = alpha_observed)
+  pgamma(quantile, post_vals[1L], post_vals[2L], ...)
+}
