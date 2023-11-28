@@ -55,3 +55,9 @@ dbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior 
   post_vals <- compute_beta_posterior_vals(alpha_prior, beta_prior, likelihood, ...)
   dbeta(quantile, post_vals[1], post_vals[2])
 }
+
+pbeta_post <- function(quantile, likelihood, ..., alpha_prior = 0.5, beta_prior = 0.5) {
+  rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
+  post_vals <- compute_beta_posterior_vals(alpha_prior, beta_prior, likelihood, ...)
+  pbeta(quantile, post_vals[1], post_vals[2])
+}
