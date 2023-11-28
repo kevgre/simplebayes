@@ -49,10 +49,9 @@ update_gamma_parameters <- function(
 #' @export
 #'
 #' @examples
-# TODO: add Jefferies priors
 dgamma_post <- function(
     quantile, observations, sample_size, likelihood, ...,
-    alpha_observed = NULL, alpha_prior = 1, beta_prior = 1) {
+    alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
@@ -79,7 +78,7 @@ dgamma_post <- function(
 #' @examples
 pgamma_post <- function(
     quantile, observations, sample_size, likelihood, ...,
-    alpha_observed = NULL, alpha_prior = 1, beta_prior = 1) {
+    alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
@@ -106,7 +105,7 @@ pgamma_post <- function(
 #' @examples
 rgamma_post <- function(
     n, observations, sample_size, likelihood, ...,
-    alpha_observed = NULL, alpha_prior = 1, beta_prior = 1) {
+    alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
     alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
