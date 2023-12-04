@@ -63,3 +63,12 @@ pnorm_post <- function(
   norm_post <- update_normal_parameters(mean_prior, variance_prior, observations)
   pnorm(quantiles, norm_post[1], norm_post[2], ...)
 }
+
+#' @rdname dnorm_post
+rnorm_post <- function(
+    n, observations, ...,
+    mean_prior = 1, variance_prior = 1 / sd(observations),
+    precision_prior = 1/variance_prior) {
+  norm_post <- update_normal_parameters(mean_prior, variance_prior, observations)
+  rnorm(n = n, norm_post[1], norm_post[2], ...)
+}

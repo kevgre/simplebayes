@@ -46,3 +46,16 @@ test_that("porm_post works", {
     pnorm(1, norm_post[1], norm_post[2], lower.tail = TRUE)
   )
 })
+
+test_that("porm_post works", {
+  obs <- rnorm(100, 4, 2)
+  norm_post <- update_normal_parameters(
+    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+  )
+  expect_equal(
+    withr::with_seed(123,
+                     rnorm_post(mean(obs), obs)),
+    withr::with_seed(123,
+                     rnorm(mean(obs), norm_post[1], norm_post[2]))
+  )
+})
