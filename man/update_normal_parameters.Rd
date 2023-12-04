@@ -5,15 +5,15 @@
 \title{Update Normal Parameters}
 \usage{
 update_normal_parameters(
-  mean_prior,
+  mu_prior,
   var_prior,
   obs,
   ...,
-  precision_prior = 1/var_prior
+  prec_prior = 1/var_prior
 )
 }
 \arguments{
-\item{mean_prior}{The prior value for the mean}
+\item{mu_prior}{The prior value for the mean}
 
 \item{var_prior}{The prior value for the variance}
 
@@ -21,7 +21,7 @@ update_normal_parameters(
 
 \item{...}{Placeholder for future capabilities. Currently ignored}
 
-\item{precision_prior}{The prior value for the precision}
+\item{prec_prior}{The prior value for the precision}
 }
 \value{
 A vector of length 2 where the posterior mean is first followed by
