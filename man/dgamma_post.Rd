@@ -2,10 +2,34 @@
 % Please edit documentation in R/gamma_priors.R
 \name{dgamma_post}
 \alias{dgamma_post}
+\alias{pgamma_post}
+\alias{rgamma_post}
 \title{Posterior Gamma Distribution}
 \usage{
 dgamma_post(
   quantile,
+  observations,
+  sample_size,
+  likelihood,
+  ...,
+  alpha_observed = NULL,
+  alpha_prior = 0,
+  beta_prior = 0
+)
+
+pgamma_post(
+  quantile,
+  observations,
+  sample_size,
+  likelihood,
+  ...,
+  alpha_observed = NULL,
+  alpha_prior = 0,
+  beta_prior = 0
+)
+
+rgamma_post(
+  n,
   observations,
   sample_size,
   likelihood,
@@ -31,6 +55,8 @@ dgamma_post(
 \item{alpha_prior}{The prior shape parameter}
 
 \item{beta_prior}{The prior rate parameter}
+
+\item{n}{The number of random values to generate}
 }
 \value{
 A vector of PDF results that is the same length as quantile.

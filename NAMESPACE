@@ -2,5 +2,3 @@
 
 export(dbeta_post)
 export(dgamma_post)
-export(pgamma_post)
-export(rgamma_post)

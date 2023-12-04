@@ -42,6 +42,7 @@ update_gamma_parameters <- function(
 #' a model with a gamma prior.
 #'
 #' @param quantile A vector of quantiles
+#' @param n The number of random values to generate
 #' @param observations The observations from the model
 #' @param sample_size The sample size from the model
 #' @param likelihood The likelihood used
@@ -64,23 +65,7 @@ dgamma_post <- function(
   stats::dgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
-#' Posterior Gamma CDF
-#'
-#' `pgamma_post()` computes the posterior PDF for a model with a gamma prior.
-#'
-#' @param quantile A vector of quantiles
-#' @param observations The observations from the model
-#' @param sample_size The sample size from the model
-#' @param likelihood The likelihood used
-#' @param ... Pass arguments to pgamma
-#' @param alpha_observed The observed shape parameter
-#' @param alpha_prior The prior shape parameter
-#' @param beta_prior The prior rate parameter
-#'
-#' @returns A vector of PDF results that is the same length as quantile.
-#' @export
-#'
-#' @examples
+#' @rdname dgamma_post
 pgamma_post <- function(
     quantile, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
@@ -91,23 +76,7 @@ pgamma_post <- function(
   stats::pgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
-#' Posterior Gamma CDF
-#'
-#' `pgamma_post()` computes the posterior PDF for a model with a gamma prior.
-#'
-#' @param n Number of results to simulate
-#' @param observations The observations from the model
-#' @param sample_size The sample size from the model
-#' @param likelihood The likelihood used
-#' @param ... Pass arguments to pgamma
-#' @param alpha_observed The observed shape parameter
-#' @param alpha_prior The prior shape parameter
-#' @param beta_prior The prior rate parameter
-#'
-#' @returns A vector of PDF results that is the same length as quantile.
-#' @export
-#'
-#' @examples
+#' @rdname dgamma_post
 rgamma_post <- function(
     n, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
