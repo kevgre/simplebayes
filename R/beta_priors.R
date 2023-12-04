@@ -6,7 +6,7 @@
 #' @param a_prior The alpha prior value
 #' @param b_prior The beta prior value
 #' @param l_hood The likelihood for the model
-#' @param result The result of the experiment (either successes or failures)
+#' @param res The result of the experiment (either successes or failures)
 #' @param s_size The sample size of the experiment
 #' @param f_rate The failure rate for the model. Only used for the negative
 #' binomial likelihood.

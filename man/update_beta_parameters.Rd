@@ -20,12 +20,12 @@ update_beta_parameters(
 
 \item{l_hood}{The likelihood for the model}
 
+\item{res}{The result of the experiment (either successes or failures)}
+
 \item{s_size}{The sample size of the experiment}
 
 \item{f_rate}{The failure rate for the model. Only used for the negative
 binomial likelihood.}
-
-\item{result}{The result of the experiment (either successes or failures)}
 }
 \value{
 A vector of length two where the first value is the alpha parameter
