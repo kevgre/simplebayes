@@ -31,7 +31,7 @@ update_beta_parameters <- function(
   c(alpha_post, beta_post)
 }
 
-#' Sample Posterior Beta Distribution
+#' Posterior Beta Distribution
 #'
 #' `dbeta_post()` will compute the posterior CDF of a model with a beta
 #' prior. Currently, the binomial, negative binomial, and geometric likelihoods

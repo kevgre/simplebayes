@@ -4,7 +4,7 @@
 \alias{dbeta_post}
 \alias{pbeta_post}
 \alias{rbeta_post}
-\title{Sample Posterior Beta Distribution}
+\title{Posterior Beta Distribution}
 \usage{
 dbeta_post(
   quantile,
