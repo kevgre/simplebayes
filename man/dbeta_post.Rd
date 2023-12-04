@@ -77,5 +77,4 @@ of a model with a beta prior.
 
 x <- seq(0, 1, length.out = 10)
 dbeta_post(x, 5, 10, "binom")
-pbeta_post(x, 5, 10, "binom")
 }
