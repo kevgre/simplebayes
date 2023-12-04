@@ -31,13 +31,20 @@ update_beta_parameters <- function(
   c(alpha_post, beta_post)
 }
 
-#' Sample Posterior Beta PDF
+#' Sample Posterior Beta Distribution
 #'
-#' `dbeta_post()` will compute the posterior distribution of a model with a beta
+#' `dbeta_post()` will compute the posterior CDF of a model with a beta
 #' prior. Currently, the binomial, negative binomial, and geometric likelihoods
 #' can be used.
 #'
+#' `pbeta_post()` will compute the posterior PDF of a model with a beta
+#' prior.
+#'
+#' `rbeta_post()` will generate random numbers from the posterior distribution
+#' of a model with a beta prior.
+#'
 #' @param quantile A vector of quantiles
+#' @param n The number of random values to generate
 #' @param result The result from the experiment as successes or failures
 #' @param sample_size The sample size from the experiement
 #' @param likelihood The likelihood to be used
@@ -62,6 +69,7 @@ dbeta_post <- function(
 
 # TODO: Wrote documentation in a way that will reuse documentation from dbeta_post
 # TODO: update all functions to accept arguments for log and ncp
+#' @rdname dbeta_post
 pbeta_post <- function(
     quantile, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
@@ -72,6 +80,7 @@ pbeta_post <- function(
   stats::pbeta(quantile, post_vals[1], post_vals[2], ...)
 }
 
+#' @rdname dbeta_post
 rbeta_post <- function(
     n, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
