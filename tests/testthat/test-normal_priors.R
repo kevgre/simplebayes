@@ -18,3 +18,17 @@ test_that("normal parameters update", {
       1/(tau_prior + nprec))
     )
 })
+
+test_that("dorm_post works", {
+  obs <- rnorm(100, 4, 2)
+  norm_post <- update_normal_parameters(
+    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+    )
+  expect_equal(
+    dnorm_post(mean(obs), obs), dnorm(mean(obs), norm_post[1], norm_post[2])
+    )
+  expect_equal(
+    dnorm_post(1, obs, log = TRUE),
+    dnorm(1, norm_post[1], norm_post[2], log = TRUE)
+  )
+})
