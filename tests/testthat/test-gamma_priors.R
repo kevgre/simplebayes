@@ -10,7 +10,7 @@ test_that("gamma parameters update", {
                   alpha_prior + s_size * a_obs, beta_prior + sum(OBS),
                   alpha_prior + s_size * a_obs, beta_prior + sum(1 / OBS),
                   alpha_prior + s_size/2, beta_prior + sum((OBS - mean(OBS))^2)/2),
-                byrow = TRUE, nrow = 4)
+                byrow = TRUE, nrow = 5)
   for (i in seq_along(likelihoods)) {
     expect_equal(
       update_gamma_parameters(
