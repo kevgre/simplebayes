@@ -29,6 +29,10 @@ update_gamma_parameters <- function(
     alpha_post <- a_prior + s_size * a_obs
     beta_post <- b_prior + sum(1/obs)
   }
+  if (l_hood == "normal") {
+    alpha_post <- a_prior + s_size/2
+    beta_post <- b_prior + sum((obs - mean(obs))^2)/2
+  }
   c(alpha_post, beta_post)
 }
 
