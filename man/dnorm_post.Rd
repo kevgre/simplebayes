@@ -2,10 +2,30 @@
 % Please edit documentation in R/normal_priors.R
 \name{dnorm_post}
 \alias{dnorm_post}
+\alias{pnorm_post}
+\alias{rnorm_post}
 \title{Posterior Normal Distribution}
 \usage{
 dnorm_post(
   quantiles,
+  observations,
+  ...,
+  mean_prior = 1,
+  variance_prior = 1/sd(observations),
+  precision_prior = 1/variance_prior
+)
+
+pnorm_post(
+  quantiles,
+  observations,
+  ...,
+  mean_prior = 1,
+  variance_prior = 1/sd(observations),
+  precision_prior = 1/variance_prior
+)
+
+rnorm_post(
+  n,
   observations,
   ...,
   mean_prior = 1,
