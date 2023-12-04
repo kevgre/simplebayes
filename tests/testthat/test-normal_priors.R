@@ -32,3 +32,17 @@ test_that("dorm_post works", {
     dnorm(1, norm_post[1], norm_post[2], log = TRUE)
   )
 })
+
+test_that("porm_post works", {
+  obs <- rnorm(100, 4, 2)
+  norm_post <- update_normal_parameters(
+    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+  )
+  expect_equal(
+    pnorm_post(mean(obs), obs), pnorm(mean(obs), norm_post[1], norm_post[2])
+  )
+  expect_equal(
+    pnorm_post(1, obs, lower.tail = TRUE),
+    pnorm(1, norm_post[1], norm_post[2], lower.tail = TRUE)
+  )
+})
