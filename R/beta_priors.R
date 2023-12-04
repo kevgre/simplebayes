@@ -67,8 +67,6 @@ dbeta_post <- function(
   stats::dbeta(quantile, post_vals[1], post_vals[2], ...)
 }
 
-# TODO: Wrote documentation in a way that will reuse documentation from dbeta_post
-# TODO: update all functions to accept arguments for log and ncp
 #' @rdname dbeta_post
 pbeta_post <- function(
     quantile, result, sample_size, likelihood, ...,
