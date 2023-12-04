@@ -32,9 +32,14 @@ update_gamma_parameters <- function(
   c(alpha_post, beta_post)
 }
 
-#' Posterior Gamma PDF
+#' Posterior Gamma Distribution
 #'
 #' `dgamma_post()` computes the posterior PDF for a model with a gamma prior.
+#'
+#' `pgamma_post()` computes the posterior CDF for a model with a gamma prior.
+#'
+#' `rgamma_post()` generates random numbers from the posterior distribution from
+#' a model with a gamma prior.
 #'
 #' @param quantile A vector of quantiles
 #' @param observations The observations from the model
