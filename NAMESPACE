@@ -2,3 +2,4 @@
 
 export(dbeta_post)
 export(dgamma_post)
+export(dnorm_post)
