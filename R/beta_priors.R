@@ -57,6 +57,10 @@ update_beta_parameters <- function(
 #' @export
 #'
 #' @examples
+#'
+#' x <- seq(0, 1, length.out = 10)
+#' dbeta_post(x, 5, 10, "binom")
+#' pbeta_post(x, 5, 10, "binom")
 dbeta_post <- function(
     quantile, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {

@@ -70,3 +70,9 @@ A vector of PDF results that is the same length as quantile.
 \code{rgamma_post()} generates random numbers from the posterior distribution from
 a model with a gamma prior.
 }
+\examples{
+
+x <- seq(0, 1, 10)
+dgamma_post(x, 10, 100, "pois")
+pgamma_post(x, 10, 100, "pois")
+}
