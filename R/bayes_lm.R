@@ -1,5 +1,5 @@
 initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
-  lm_fit <- stats::lm(y ~ 0 + x)
+  lm_fit <- stats::lm(Y ~ 0 + X)
   if (is.null(b_prior)) {
     b_prior <- g_frac * lm_fit$coefficients
   }
@@ -14,10 +14,7 @@ bayes_lm <- function(
     ) {
   g <- length(y)
   g_fraction <- g / (g + 1)
-  if (is.null(beta_prior)) {
-    beta_prior <- g_fraction * stats::lm(y ~ 0 + x)$coefficients
-    variance_prior <- summary(lm.fit)$sigma^2
-  }
+  priors <- initialize_priors(y, x, g_fraction, beta_prior, variance_prior)
 
   hat_matrix <- x %*% tcrossprod(solve(crossprod(x)), x)
   SSRg <- t(y) %*% (diag(g) - g_fraction * hat_matrix) %*% y
