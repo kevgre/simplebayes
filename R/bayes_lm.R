@@ -23,10 +23,8 @@ bayes_lm <- function(
   g_fraction <- g / (g + 1)
   priors <- initialize_priors(y, x, g_fraction, beta_prior, variance_prior)
 
-  hat_matrix <- x %*% tcrossprod(solve(crossprod(x)), x)
-  SSRg <- t(y) %*% (diag(g) - g_fraction * hat_matrix) %*% y
-  variance_post <- 1/rgamma(
-    iterations, (mean_prior + g)/2, (variance_prior * mean_prior + SSRg)/2
+  variance_posterior <- variance_post(
+    y, x, iterations, g = g, mean_prior, priors$variance_post
     )
 
   temp <- g_fraction * solve(crossprod(x))
