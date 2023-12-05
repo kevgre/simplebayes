@@ -18,7 +18,7 @@ variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
 
 beta_post <- function(X, iters, G, b_prior, v_post) {
   temp <- G/(G + 1) * solve(crossprod(X))
-  beta_out <- matrix(0, length(beta_prior), iters)
+  beta_out <- matrix(0, length(b_prior), iters)
   for (i in seq_len(iters)) {
     beta_out[, i] <- mvtnorm::rmvnorm(1L, b_prior, v_post[i] * temp)
   }
