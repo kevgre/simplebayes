@@ -39,4 +39,8 @@ test_that("beta post works", {
     dim(beta_post(x, iters = iters, 100, priors$beta_prior, var_post)),
     c(length(priors$beta_prior), iters)
     )
+  expect_true(all(
+    !is.na(beta_post(x, iters = iters, 100, priors$beta_prior, var_post))
+    )
+    )
 })
