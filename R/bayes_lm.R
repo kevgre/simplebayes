@@ -1,10 +1,20 @@
+initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
+  lm_fit <- stats::lm(y ~ 0 + x)
+  if (is.null(b_prior)) {
+    b_prior <- g_frac * lm_fit$coefficients
+  }
+  if (is.null(v_prior)) {
+    v_prior <- summary(lm_fit)$sigma^2
+  }
+  list("beta_prior" = b_prior, "variance_prior" = v_prior)
+}
+
 bayes_lm <- function(
     y, x, ..., iterations = 10000, mean_prior = 1, beta_prior = NULL, variance_prior = NULL
     ) {
   g <- length(y)
   g_fraction <- g / (g + 1)
   if (is.null(beta_prior)) {
-    g <- length(y)
     beta_prior <- g_fraction * stats::lm(y ~ 0 + x)$coefficients
     variance_prior <- summary(lm.fit)$sigma^2
   }
