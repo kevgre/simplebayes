@@ -28,3 +28,15 @@ test_that("variance post works", {
   expect_length(variance_post(y, x, 10, 100, 1, v_prior), 10)
   expect_true(all(variance_post(y, x, 10, 100, 1, v_prior) > 0))
 })
+
+test_that("beta post works", {
+  y <- rnorm(100, 1, 3)
+  x <- matrix(rnorm(1000, 2, 3), nrow = 100)
+  priors <- initialize_priors(y, x, 100/101, NULL, NULL)
+  iters <- 10
+  var_post <- variance_post(y, x, iters = iters, 100, 1, priors$variance_prior)
+  expect_equal(
+    dim(beta_post(x, iters = iters, 100, priors$beta_prior, var_post)),
+    c(length(priors$beta_prior), iters)
+    )
+})
