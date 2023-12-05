@@ -26,7 +26,8 @@ beta_post <- function(X, iters, G, b_prior, v_post) {
 }
 
 bayes_lm <- function(
-    y, x, ..., iterations = 10000, mean_prior = 1, beta_prior = NULL, variance_prior = NULL
+    y, x, ..., iterations = 10000, mean_prior = 1,
+    beta_prior = NULL, variance_prior = NULL
     ) {
   if (iterations <= 0) {
     rlang::abort("iterations must be greater than 0")
