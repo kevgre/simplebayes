@@ -19,3 +19,12 @@ test_that("initialize_priors works", {
     ignore_attr = TRUE
     )
 })
+
+test_that("variance post works", {
+  y <- rnorm(100, 1, 3)
+  x <- matrix(rnorm(1000, 2, 3), nrow = 100)
+  v_prior <- initialize_priors(y, x, 100/101, NULL, NULL)$variance_prior
+  iters <- 10
+  expect_length(variance_post(y, x, 10, 100, 1, v_prior), 10)
+  expect_true(all(variance_post(y, x, 10, 100, 1, v_prior) > 0))
+})
