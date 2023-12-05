@@ -9,6 +9,13 @@ initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
   list("beta_prior" = b_prior, "variance_prior" = v_prior)
 }
 
+variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
+  g_frac <- g/(1 + g)
+  hat_matrix <- X %*% tcrossprod(solve(crossprod(X)), X)
+  SSRg <- crossprod(Y, diag(g) - g_frac * hat_matrix) %*% Y
+  1/rgamma(iters, (mu_prior + g)/2, (s2_prior * mu_prior + SSRg)/2)
+}
+
 bayes_lm <- function(
     y, x, ..., iterations = 10000, mean_prior = 1, beta_prior = NULL, variance_prior = NULL
     ) {
