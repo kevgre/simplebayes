@@ -47,6 +47,9 @@ update_normal_parameters <- function(
 #' @export
 #'
 #' @examples
+#' x <- seq(0, 1, 10)
+#' obs <- rnorm(50)
+#' dnorm_post(x, obs)
 dnorm_post <- function(
     quantiles, observations, ...,
     mean_prior = 1, variance_prior = 1 / sd(observations),
