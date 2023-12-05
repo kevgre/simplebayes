@@ -36,12 +36,9 @@ bayes_lm <- function(
     y, x, iterations, g = g, mean_prior, priors$variance_post
     )
 
-  temp <- g_fraction * solve(crossprod(x))
-  beta_out <- matrix(0, nrow = length(beta_prior), ncol = iterations)
-  for (i in seq_len(iterations)) {
-    Sigma.n <- variance_post[i] * temp
-    beta_out[, i] <- mvtnorm::rmvnorm(1L, beta_prior, Sigma.n)
-  }
+  beta_out <- beta_post(
+    x, iterations, g, priors$beta_prior, priors$variance_prior
+    )
   out <- cbind(beta_out, variance_post)
   colnames(out) <- c(paste0("beta", seq_along(beta_prior)), "variance")
   out
