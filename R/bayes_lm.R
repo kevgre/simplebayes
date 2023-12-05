@@ -47,7 +47,7 @@ bayes_lm <- function(
     )
 
   beta_out <- beta_post(
-    x, iterations, g, priors$beta_prior, priors$variance_prior
+    x, iterations, g, priors$beta_prior, variance_posterior
     )
   out <- cbind(beta_out, variance_post)
   colnames(out) <- c(paste0("beta", seq_along(beta_prior)), "variance")
