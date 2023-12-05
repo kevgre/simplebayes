@@ -28,9 +28,19 @@ beta_post <- function(X, iters, G, b_prior, v_post) {
 bayes_lm <- function(
     y, x, ..., iterations = 10000, mean_prior = 1, beta_prior = NULL, variance_prior = NULL
     ) {
+  if (iterations <= 0) {
+    rlang::abort("iterations must be greater than 0")
+  }
+  if (length(y) != nrow(x)) {
+    rlang::abort("The length of y must equal the number of rows in x")
+  }
   g <- length(y)
   g_fraction <- g / (g + 1)
   priors <- initialize_priors(y, x, g_fraction, beta_prior, variance_prior)
+
+  if (ncol(x) != length(priors$beta_prior)) {
+    rlang::abort("Number of parameters do not match")
+  }
 
   variance_posterior <- variance_post(
     y, x, iterations, g = g, mean_prior, priors$variance_post
