@@ -1,3 +1,14 @@
+#' Initialize linear model priors
+#'
+#' `initialize_priors()` ensures that both beta and the variance have priors.
+#'
+#' @param Y A vector of response values
+#' @param X A matrix of input values
+#' @param g_frac The unit information divided by itself plus 1
+#' @param b_prior The prior values for beta
+#' @param v_prior The prior values for the variance
+#'
+#' @returns A list of the priors. The beta priors are first then the variance.
 initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
   lm_fit <- stats::lm(Y ~ 0 + X)
   if (is.null(b_prior)) {
@@ -30,18 +41,17 @@ variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
 
 #' Compute Posterior Regression Coefficients
 #'
+#' `coefficients_post()` computes the posterior regression coefficients for the
+#' linear regression model
 #'
+#' @param X A matrix of input values
+#' @param iters The number of iterations to perform
+#' @param G The unit information prior. Equivalent to the number of rows in X
+#' @param b_prior The prior values of the regression coefficients
+#' @param v_post The posterior values for the variance
 #'
-#' @param X
-#' @param iters
-#' @param G
-#' @param b_prior
-#' @param v_post
-#'
-#' @return
-#' @export
-#'
-#' @examples
+#' @returns A matrix of regression coefficients where each column represents an
+#' iteration in the Gibbs Sampler.
 coefficients_post <- function(X, iters, G, b_prior, v_post) {
   temp <- G/(G + 1) * solve(crossprod(X))
   beta_out <- matrix(0, length(b_prior), iters)
@@ -51,6 +61,30 @@ coefficients_post <- function(X, iters, G, b_prior, v_post) {
   beta_out
 }
 
+#' Bayesian Linear Model
+#'
+#' `bayes_lm()` uses a Gibbs Sampler to create a Bayesian linear model.
+#'
+#' @param y A vector of response values
+#' @param x A matrix of input values
+#' @param ... Placeholder for future capabilities. Currently ignored.
+#' @param iterations The number of iterations in the Gibbs Sampler
+#' @param mean_prior The prior value for the mean
+#' @param beta_prior The prior values for the regression coefficients
+#' @param variance_prior The prior value for variance
+#'
+#' @returns A matrix of posterior values where each column is a parameter. The
+#' regression coefficients are first, then the variance.
+#' @export
+#'
+#' @examples
+#' # Simulate data
+#' X <- matrix(rnorm(1000, 5, 2), nrow = 100)
+#' betas <- runif(10, -2, 2)
+#' Y <- X %*% betas + rnorm(100, 0, 3)
+#'
+#' # Perform Bayesian Linear Regression
+#' bayes_lm(Y, X, iterations = 10)
 bayes_lm <- function(
     y, x, ..., iterations = 10000, mean_prior = 1,
     beta_prior = NULL, variance_prior = NULL
