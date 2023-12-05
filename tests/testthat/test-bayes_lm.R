@@ -44,3 +44,13 @@ test_that("beta post works", {
     )
     )
 })
+
+test_that("bayes_lm works", {
+  Y <- rnorm(100, 1, 3)
+  X <- matrix(rnorm(1000, 2, 3), nrow = 100)
+  expect_error(bayes_lm(rnorm(10), matrix(0, nrow = 9)))
+  expect_error(bayes_lm(Y, X, iterations = 0))
+  expect_error(bayes_lm(Y, X, iterations = -100))
+  expect_error(bayes_lm(Y, X, beta_prior = runif(9, 0, 4)))
+  expect_equal(dim(bayes_lm(Y, X, iterations = 10)), c(10, ncol(X) + 1))
+})
