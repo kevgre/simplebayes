@@ -65,3 +65,8 @@ model with a normal prior.
 
 These posterior functions assume that the variance for the model is fixed.
 }
+\examples{
+x <- seq(0, 1, 10)
+obs <- rnorm(50)
+dnorm_post(x, obs)
+}
