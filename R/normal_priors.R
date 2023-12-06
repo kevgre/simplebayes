@@ -50,6 +50,10 @@ update_normal_parameters <- function(
 #' x <- seq(0, 1, 10)
 #' obs <- rnorm(50)
 #' dnorm_post(x, obs)
+#' pnorm_post(x, obs)
+#'
+#' # Random numbers can also be generated
+#' rnorm_post(5, obs)
 dnorm_post <- function(
     quantiles, observations, ...,
     mean_prior = 1, variance_prior = 1 / stats::sd(observations),
