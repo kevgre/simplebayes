@@ -1,3 +1,24 @@
+#' Create Trace Plots
+#'
+#' `traceplot()` creates the trace plots for the results from `bayes_lm()`. This
+#' function requires the ggplot2 and tidyr packages from the tidyverse.
+#'
+#' @param bayes_lm_distributions The result from `bayes_lm`
+#'
+#' @returns A ggplot2 plot of trace plots
+#' @export
+#'
+#' @examples
+#' #' # Simulate data
+#' X <- matrix(rnorm(1000, 5, 2), nrow = 100)
+#' betas <- runif(10, -2, 2)
+#' Y <- X %*% betas + rnorm(100, 0, 3)
+#'
+#' # Perform Bayesian Linear Regression
+#' result <- bayes_lm(Y, X, iterations = 10)
+#'
+#' # Plot data
+#' traceplot(result)
 traceplot <- function(bayes_lm_distributions) {
   rlang::check_installed("ggplot2")
   rlang::check_installed("tidyr")
