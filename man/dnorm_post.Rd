@@ -11,7 +11,7 @@ dnorm_post(
   observations,
   ...,
   mean_prior = 1,
-  variance_prior = 1/sd(observations),
+  variance_prior = 1/stats::sd(observations),
   precision_prior = 1/variance_prior
 )
 
@@ -20,7 +20,7 @@ pnorm_post(
   observations,
   ...,
   mean_prior = 1,
-  variance_prior = 1/sd(observations),
+  variance_prior = 1/stats::sd(observations),
   precision_prior = 1/variance_prior
 )
 
@@ -29,7 +29,7 @@ rnorm_post(
   observations,
   ...,
   mean_prior = 1,
-  variance_prior = 1/sd(observations),
+  variance_prior = 1/stats::sd(observations),
   precision_prior = 1/variance_prior
 )
 }
