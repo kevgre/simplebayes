@@ -52,5 +52,5 @@ test_that("bayes_lm works", {
   expect_error(bayes_lm(Y, X, iterations = 0))
   expect_error(bayes_lm(Y, X, iterations = -100))
   expect_error(bayes_lm(Y, X, beta_prior = runif(9, 0, 4)))
-  expect_equal(dim(bayes_lm(Y, X, iterations = 10)), c(10, ncol(X) + 1))
+  expect_equal(dim(bayes_lm(Y, X, iterations = 100)), c(100, ncol(X) + 1))
 })
