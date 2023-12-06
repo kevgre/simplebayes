@@ -73,6 +73,7 @@ dgamma_post <- function(
 }
 
 #' @rdname dgamma_post
+#' @export
 pgamma_post <- function(
     quantile, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
@@ -84,6 +85,7 @@ pgamma_post <- function(
 }
 
 #' @rdname dgamma_post
+#' @export
 rgamma_post <- function(
     n, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {

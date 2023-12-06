@@ -59,6 +59,7 @@ dnorm_post <- function(
 }
 
 #' @rdname dnorm_post
+#' @export
 pnorm_post <- function(
     quantiles, observations, ...,
     mean_prior = 1, variance_prior = 1 / sd(observations),
@@ -68,6 +69,7 @@ pnorm_post <- function(
 }
 
 #' @rdname dnorm_post
+#' @export
 rnorm_post <- function(
     n, observations, ...,
     mean_prior = 1, variance_prior = 1 / sd(observations),

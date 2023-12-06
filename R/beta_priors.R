@@ -71,6 +71,7 @@ dbeta_post <- function(
 }
 
 #' @rdname dbeta_post
+#' @export
 pbeta_post <- function(
     quantile, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
@@ -82,6 +83,7 @@ pbeta_post <- function(
 }
 
 #' @rdname dbeta_post
+#' @export
 rbeta_post <- function(
     n, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
