@@ -62,6 +62,10 @@ update_gamma_parameters <- function(
 #'
 #' x <- seq(0, 1, 10)
 #' dgamma_post(x, 10, 100, "pois")
+#' pgamma_post(x, 10, 100, "pois")
+#'
+#' # Random numbers can also be generated
+#' rgamma_post(5, 10, 100, "pois")
 dgamma_post <- function(
     quantile, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {

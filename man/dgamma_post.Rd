@@ -74,4 +74,8 @@ a model with a gamma prior.
 
 x <- seq(0, 1, 10)
 dgamma_post(x, 10, 100, "pois")
+pgamma_post(x, 10, 100, "pois")
+
+# Random numbers can also be generated
+rgamma_post(5, 10, 100, "pois")
 }
