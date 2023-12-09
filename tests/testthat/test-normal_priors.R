@@ -47,7 +47,21 @@ test_that("porm_post works", {
   )
 })
 
-test_that("porm_post works", {
+test_that("qorm_post works", {
+  obs <- rnorm(100, 4, 2)
+  norm_post <- update_normal_parameters(
+    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+  )
+  expect_equal(
+    qnorm_post(0.1, obs), qnorm(0.1, norm_post[1], norm_post[2])
+  )
+  expect_equal(
+    qnorm_post(1, obs, lower.tail = TRUE),
+    qnorm(1, norm_post[1], norm_post[2], lower.tail = TRUE)
+  )
+})
+
+test_that("rorm_post works", {
   obs <- rnorm(100, 4, 2)
   norm_post <- update_normal_parameters(
     mu_prior = 1, var_prior = 1/sd(obs), obs = obs
