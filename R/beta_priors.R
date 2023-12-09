@@ -40,10 +40,14 @@ update_beta_parameters <- function(
 #' `pbeta_post()` will compute the posterior PDF of a model with a beta
 #' prior.
 #'
+#' `qbeta_post()` computes the quantile for a given probability from a model
+#' with a beta prior.
+#'
 #' `rbeta_post()` will generate random numbers from the posterior distribution
 #' of a model with a beta prior.
 #'
 #' @param quantile A vector of quantiles
+#' @param percentile A vector of percentiles
 #' @param n The number of random values to generate
 #' @param result The result from the experiment as successes or failures
 #' @param sample_size The sample size from the experiement
@@ -58,9 +62,10 @@ update_beta_parameters <- function(
 #'
 #' @examples
 #'
-#' x <- seq(0, 1, length.out = 10)
+#' x <- seq(0, 1, by = 0.1)
 #' dbeta_post(x, 5, 10, "binom")
 #' pbeta_post(x, 5, 10, "binom")
+#' qbeta_post(seq(0.1, 0.9, by = 0.1), 5, 10, "binom")
 #'
 #' # Can also generate random numbers
 #' rbeta_post(3, 5, 10, "binom")

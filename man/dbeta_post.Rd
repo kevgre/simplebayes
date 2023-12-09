@@ -3,6 +3,7 @@
 \name{dbeta_post}
 \alias{dbeta_post}
 \alias{pbeta_post}
+\alias{qbeta_post}
 \alias{rbeta_post}
 \title{Posterior Beta Distribution}
 \usage{
@@ -19,6 +20,17 @@ dbeta_post(
 
 pbeta_post(
   quantile,
+  result,
+  sample_size,
+  likelihood,
+  ...,
+  failure_rate = NULL,
+  alpha_prior = 0.5,
+  beta_prior = 0.5
+)
+
+qbeta_post(
+  percentile,
   result,
   sample_size,
   likelihood,
@@ -56,6 +68,8 @@ rbeta_post(
 
 \item{beta_prior}{The prior value for the beta parameter}
 
+\item{percentile}{A vector of percentiles}
+
 \item{n}{The number of random values to generate}
 }
 \value{
@@ -70,14 +84,18 @@ can be used.
 \code{pbeta_post()} will compute the posterior PDF of a model with a beta
 prior.
 
+\code{qbeta_post()} computes the quantile for a given probability from a model
+with a beta prior.
+
 \code{rbeta_post()} will generate random numbers from the posterior distribution
 of a model with a beta prior.
 }
 \examples{
 
-x <- seq(0, 1, length.out = 10)
+x <- seq(0, 1, by = 0.1)
 dbeta_post(x, 5, 10, "binom")
 pbeta_post(x, 5, 10, "binom")
+qbeta_post(seq(0.1, 0.9, by = 0.1), 5, 10, "binom")
 
 # Can also generate random numbers
 rbeta_post(3, 5, 10, "binom")
