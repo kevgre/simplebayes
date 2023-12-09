@@ -58,6 +58,26 @@ test_that("pbeta_post works", {
                  pbeta_post(quants[6], "binom", result = 3, sample_size = 10)))
 })
 
+test_that("qbeta_post works", {
+  expect_error(qbeta_post(1/2, "poisson"))
+  expect_equal(qbeta_post(1/2, likelihood = "binom", result = 2, sample_size = 10),
+               qbeta(1/2, 0.5 + 2, 10 - 2 + 0.5))
+  expect_equal(
+    qbeta_post(1/2, likelihood = "nbinom", result = 2, sample_size = 10, failure_rate = 0.5),
+    qbeta(1/2, 0.5 + 10 * 0.5, 2 + 0.5))
+  expect_equal(qbeta_post(1/2, likelihood = "geometric", result = 2, sample_size = 10),
+               qbeta(1/2, 0.5 + 10, 2 + 0.5))
+  quants <- 1/c(2, 3, 4, 5, 2, 3)
+  expect_length(qbeta_post(quants, "binom", result = 3, sample_size = 10), length(quants))
+  expect_equal(qbeta_post(quants, "binom", result = 3, sample_size = 10),
+               c(qbeta_post(quants[1], "binom", result = 3, sample_size = 10),
+                 qbeta_post(quants[2], "binom", result = 3, sample_size = 10),
+                 qbeta_post(quants[3], "binom", result = 3, sample_size = 10),
+                 qbeta_post(quants[4], "binom", result = 3, sample_size = 10),
+                 qbeta_post(quants[5], "binom", result = 3, sample_size = 10),
+                 qbeta_post(quants[6], "binom", result = 3, sample_size = 10)))
+})
+
 test_that("rbeta_post works", {
   expect_error(rbeta_post(2, "poisson"))
   expect_equal(
