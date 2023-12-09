@@ -68,6 +68,8 @@ rgamma_post(
 
 \item{beta_prior}{The prior rate parameter}
 
+\item{percentile}{A vector of percentiles}
+
 \item{n}{The number of random values to generate}
 }
 \value{

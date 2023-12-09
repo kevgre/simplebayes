@@ -49,6 +49,7 @@ update_gamma_parameters <- function(
 #' a model with a gamma prior.
 #'
 #' @param quantile A vector of quantiles
+#' @param percentile A vector of percentiles
 #' @param n The number of random values to generate
 #' @param observations The observations from the model
 #' @param sample_size The sample size from the model
