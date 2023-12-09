@@ -3,6 +3,7 @@
 \name{dgamma_post}
 \alias{dgamma_post}
 \alias{pgamma_post}
+\alias{qgamma_post}
 \alias{rgamma_post}
 \title{Posterior Gamma Distribution}
 \usage{
@@ -19,6 +20,17 @@ dgamma_post(
 
 pgamma_post(
   quantile,
+  observations,
+  sample_size,
+  likelihood,
+  ...,
+  alpha_observed = NULL,
+  alpha_prior = 0,
+  beta_prior = 0
+)
+
+qgamma_post(
+  percentile,
   observations,
   sample_size,
   likelihood,
@@ -67,14 +79,18 @@ A vector of PDF results that is the same length as quantile.
 \details{
 \code{pgamma_post()} computes the posterior CDF for a model with a gamma prior.
 
+\code{qgamma_post()} computes the quantile for a given probability from a model
+with a gamma prior.
+
 \code{rgamma_post()} generates random numbers from the posterior distribution from
 a model with a gamma prior.
 }
 \examples{
 
-x <- seq(0, 1, 10)
+x <- seq(0, 1, by = 0.1)
 dgamma_post(x, 10, 100, "pois")
 pgamma_post(x, 10, 100, "pois")
+qgamma_post(x, 10, 100, "pois")
 
 # Random numbers can also be generated
 rgamma_post(5, 10, 100, "pois")
