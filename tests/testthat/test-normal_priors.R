@@ -9,24 +9,27 @@ test_that("normal parameters update", {
   expect_equal(
     update_normal_parameters(mu_prior, s2_prior, obs = obs),
     update_normal_parameters(
-      mu_prior, s2_prior, obs = obs, precision_prior = 1/s2_prior
-      )
+      mu_prior, s2_prior,
+      obs = obs, precision_prior = 1 / s2_prior
     )
+  )
   expect_equal(
     update_normal_parameters(mu_prior, s2_prior, obs = obs),
-    c(mu_num/(tau_prior + nprec),
-      1/(tau_prior + nprec))
+    c(
+      mu_num / (tau_prior + nprec),
+      1 / (tau_prior + nprec)
     )
+  )
 })
 
 test_that("dorm_post works", {
   obs <- rnorm(100, 4, 2)
   norm_post <- update_normal_parameters(
-    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
-    )
+    mu_prior = 1, var_prior = 1 / sd(obs), obs = obs
+  )
   expect_equal(
     dnorm_post(mean(obs), obs), dnorm(mean(obs), norm_post[1], norm_post[2])
-    )
+  )
   expect_equal(
     dnorm_post(1, obs, log = TRUE),
     dnorm(1, norm_post[1], norm_post[2], log = TRUE)
@@ -36,7 +39,7 @@ test_that("dorm_post works", {
 test_that("porm_post works", {
   obs <- rnorm(100, 4, 2)
   norm_post <- update_normal_parameters(
-    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+    mu_prior = 1, var_prior = 1 / sd(obs), obs = obs
   )
   expect_equal(
     pnorm_post(mean(obs), obs), pnorm(mean(obs), norm_post[1], norm_post[2])
@@ -50,7 +53,7 @@ test_that("porm_post works", {
 test_that("qorm_post works", {
   obs <- rnorm(100, 4, 2)
   norm_post <- update_normal_parameters(
-    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+    mu_prior = 1, var_prior = 1 / sd(obs), obs = obs
   )
   expect_equal(
     qnorm_post(0.1, obs), qnorm(0.1, norm_post[1], norm_post[2])
@@ -64,12 +67,16 @@ test_that("qorm_post works", {
 test_that("rorm_post works", {
   obs <- rnorm(100, 4, 2)
   norm_post <- update_normal_parameters(
-    mu_prior = 1, var_prior = 1/sd(obs), obs = obs
+    mu_prior = 1, var_prior = 1 / sd(obs), obs = obs
   )
   expect_equal(
-    withr::with_seed(123,
-                     rnorm_post(mean(obs), obs)),
-    withr::with_seed(123,
-                     rnorm(mean(obs), norm_post[1], norm_post[2]))
+    withr::with_seed(
+      123,
+      rnorm_post(mean(obs), obs)
+    ),
+    withr::with_seed(
+      123,
+      rnorm(mean(obs), norm_post[1], norm_post[2])
+    )
   )
 })

@@ -33,10 +33,10 @@ initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
 #'
 #' @returns A vector of posterior variance values
 variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
-  g_frac <- g/(1 + g)
+  g_frac <- g / (1 + g)
   hat_matrix <- X %*% tcrossprod(solve(crossprod(X)), X)
   SSRg <- crossprod(Y, diag(g) - g_frac * hat_matrix) %*% Y
-  1/stats::rgamma(iters, (mu_prior + g)/2, (s2_prior * mu_prior + SSRg)/2)
+  1 / stats::rgamma(iters, (mu_prior + g) / 2, (s2_prior * mu_prior + SSRg) / 2)
 }
 
 #' Compute Posterior Regression Coefficients
@@ -53,7 +53,7 @@ variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
 #' @returns A matrix of regression coefficients where each column represents an
 #' iteration in the Gibbs Sampler.
 coefficients_post <- function(X, iters, G, b_prior, v_post) {
-  temp <- G/(G + 1) * solve(crossprod(X))
+  temp <- G / (G + 1) * solve(crossprod(X))
   beta_out <- matrix(0, length(b_prior), iters)
   for (i in seq_len(iters)) {
     beta_out[, i] <- mvtnorm::rmvnorm(1L, b_prior, v_post[i] * temp)
@@ -87,8 +87,7 @@ coefficients_post <- function(X, iters, G, b_prior, v_post) {
 #' bayes_lm(Y, X, iterations = 10)
 bayes_lm <- function(
     y, x, ..., iterations = 10000, mean_prior = 1,
-    beta_prior = NULL, variance_prior = NULL
-    ) {
+    beta_prior = NULL, variance_prior = NULL) {
   if (iterations <= 0) {
     rlang::abort("iterations must be greater than 0")
   }
@@ -104,12 +103,13 @@ bayes_lm <- function(
   }
 
   variance_posterior <- variance_post(
-    y, x, iterations, g = g, mean_prior, priors$variance_prior
-    )
+    y, x, iterations,
+    g = g, mean_prior, priors$variance_prior
+  )
 
   beta_out <- coefficients_post(
     x, iterations, g, priors$beta_prior, variance_posterior
-    )
+  )
   out <- t(rbind(beta_out, variance_posterior))
   colnames(out) <- c(paste0("beta", seq_along(priors$beta_prior)), "variance")
   out

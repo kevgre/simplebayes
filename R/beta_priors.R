@@ -75,7 +75,7 @@ dbeta_post <- function(
   rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
   post_vals <- update_beta_parameters(
     alpha_prior, beta_prior, likelihood, result, sample_size, failure_rate
-    )
+  )
   stats::dbeta(quantile, post_vals[1], post_vals[2], ...)
 }
 

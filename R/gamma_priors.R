@@ -15,8 +15,7 @@
 #' @returns A vector of length two where the shape parameter is first and then
 #' the rate parameter
 update_gamma_parameters <- function(
-    a_prior, b_prior, l_hood, ..., obs = NULL, s_size = NULL, a_obs = NULL
-    ) {
+    a_prior, b_prior, l_hood, ..., obs = NULL, s_size = NULL, a_obs = NULL) {
   if (l_hood == "pois" | l_hood == "exp") {
     alpha_post <- a_prior + sum(obs)
     beta_post <- b_prior + s_size
@@ -27,11 +26,11 @@ update_gamma_parameters <- function(
   }
   if (l_hood == "invgamma") {
     alpha_post <- a_prior + s_size * a_obs
-    beta_post <- b_prior + sum(1/obs)
+    beta_post <- b_prior + sum(1 / obs)
   }
   if (l_hood == "normal") {
-    alpha_post <- a_prior + s_size/2
-    beta_post <- b_prior + sum((obs - mean(obs))^2)/2
+    alpha_post <- a_prior + s_size / 2
+    beta_post <- b_prior + sum((obs - mean(obs))^2) / 2
   }
   c(alpha_post, beta_post)
 }
@@ -76,8 +75,10 @@ dgamma_post <- function(
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
-    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
-    a_obs = alpha_observed)
+    alpha_prior, beta_prior, likelihood,
+    obs = observations, s_size = sample_size,
+    a_obs = alpha_observed
+  )
   stats::dgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
@@ -88,8 +89,10 @@ pgamma_post <- function(
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
-    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
-    a_obs = alpha_observed)
+    alpha_prior, beta_prior, likelihood,
+    obs = observations, s_size = sample_size,
+    a_obs = alpha_observed
+  )
   stats::pgamma(quantile, post_vals[1L], post_vals[2L], ...)
 }
 
@@ -100,8 +103,10 @@ qgamma_post <- function(
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
-    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
-    a_obs = alpha_observed)
+    alpha_prior, beta_prior, likelihood,
+    obs = observations, s_size = sample_size,
+    a_obs = alpha_observed
+  )
   stats::qgamma(percentile, post_vals[1L], post_vals[2L], ...)
 }
 
@@ -112,7 +117,9 @@ rgamma_post <- function(
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
   rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
   post_vals <- update_gamma_parameters(
-    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
-    a_obs = alpha_observed)
+    alpha_prior, beta_prior, likelihood,
+    obs = observations, s_size = sample_size,
+    a_obs = alpha_observed
+  )
   stats::rgamma(n = n, post_vals[1L], post_vals[2L], ...)
 }
