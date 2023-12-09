@@ -6,7 +6,7 @@
 \alias{simplebayes-package}
 \title{simplebayes: Implement Simple Bayesian Statistics}
 \description{
-What the package does (one paragraph).
+Compute posterior distributions from simple Bayesian Models. This can be done for models with Beta, Gamma, and Normal priors as well as for a linear model.
 }
 \author{
 \strong{Maintainer}: Kevin Green \email{greenk12@tamu.edu}
