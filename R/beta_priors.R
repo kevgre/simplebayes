@@ -88,6 +88,18 @@ pbeta_post <- function(
 
 #' @rdname dbeta_post
 #' @export
+qbeta_post <- function(
+    percentile, result, sample_size, likelihood, ...,
+    failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
+  rlang::arg_match(likelihood, c("binom", "nbinom", "geometric"))
+  post_vals <- update_beta_parameters(
+    alpha_prior, beta_prior, likelihood, result, sample_size, failure_rate
+  )
+  stats::pbeta(percentile, post_vals[1], post_vals[2], ...)
+}
+
+#' @rdname dbeta_post
+#' @export
 rbeta_post <- function(
     n, result, sample_size, likelihood, ...,
     failure_rate = NULL, alpha_prior = 0.5, beta_prior = 0.5) {
