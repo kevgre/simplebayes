@@ -74,6 +74,16 @@ pnorm_post <- function(
 
 #' @rdname dnorm_post
 #' @export
+qnorm_post <- function(
+    percentiles, observations, ...,
+    mean_prior = 1, variance_prior = 1 / stats::sd(observations),
+    precision_prior = 1/variance_prior) {
+  norm_post <- update_normal_parameters(mean_prior, variance_prior, observations)
+  stats::qnorm(percentiles, norm_post[1], norm_post[2], ...)
+}
+
+#' @rdname dnorm_post
+#' @export
 rnorm_post <- function(
     n, observations, ...,
     mean_prior = 1, variance_prior = 1 / stats::sd(observations),
