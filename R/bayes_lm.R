@@ -53,7 +53,7 @@ variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
 #' @returns A matrix of regression coefficients where each column represents an
 #' iteration in the Gibbs Sampler.
 coefficients_post <- function(X, iters, G, b_prior, v_post) {
-  temp <- G / (G + 1) * solve(crossprod(X))
+  temp <- G / (G + 1) * solve(Matrix::nearPD(crossprod(X))$mat)
   beta_out <- matrix(0, length(b_prior), iters)
   for (i in seq_len(iters)) {
     beta_out[, i] <- mvtnorm::rmvnorm(1L, b_prior, v_post[i] * temp)
