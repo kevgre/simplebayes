@@ -90,6 +90,18 @@ pgamma_post <- function(
 
 #' @rdname dgamma_post
 #' @export
+qgamma_post <- function(
+    percentile, observations, sample_size, likelihood, ...,
+    alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
+  rlang::arg_match(likelihood, c("pois", "exp", "gamma", "invgamma"))
+  post_vals <- update_gamma_parameters(
+    alpha_prior, beta_prior, likelihood, obs = observations, s_size = sample_size,
+    a_obs = alpha_observed)
+  stats::qgamma(percentile, post_vals[1L], post_vals[2L], ...)
+}
+
+#' @rdname dgamma_post
+#' @export
 rgamma_post <- function(
     n, observations, sample_size, likelihood, ...,
     alpha_observed = NULL, alpha_prior = 0, beta_prior = 0) {
