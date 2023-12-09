@@ -3,7 +3,9 @@ Title: Implement Simple Bayesian Statistics
 Version: 0.0.0.9000
 Authors@R: 
     person("Kevin", "Green", , "greenk12@tamu.edu", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Compute posterior distributions from simple Bayesian Models. This
+    can be done for models with Beta, Gamma, and Normal priors as well as for a
+    linear model.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
