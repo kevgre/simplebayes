@@ -3,6 +3,7 @@
 \name{dnorm_post}
 \alias{dnorm_post}
 \alias{pnorm_post}
+\alias{qnorm_post}
 \alias{rnorm_post}
 \title{Posterior Normal Distribution}
 \usage{
@@ -17,6 +18,15 @@ dnorm_post(
 
 pnorm_post(
   quantiles,
+  observations,
+  ...,
+  mean_prior = 1,
+  variance_prior = 1/stats::sd(observations),
+  precision_prior = 1/variance_prior
+)
+
+qnorm_post(
+  percentiles,
   observations,
   ...,
   mean_prior = 1,
@@ -47,6 +57,8 @@ lower.tail}
 
 \item{precision_prior}{The prior value for the variance}
 
+\item{percentiles}{A vector of percentiles}
+
 \item{n}{The number of random values to generate}
 }
 \value{
@@ -58,7 +70,10 @@ normal prior.
 }
 \details{
 \code{pnorm_post()} computes values from the posterior CDF for a model with a
-normal prior
+normal prior.
+
+\code{qnorm_post()} computes the quantile corresponding with a percentile for a
+model with a normal prior.
 
 \code{rnorm_post} generates a random value from the posterior distribution for a
 model with a normal prior.
@@ -66,10 +81,11 @@ model with a normal prior.
 These posterior functions assume that the variance for the model is fixed.
 }
 \examples{
-x <- seq(0, 1, 10)
+x <- seq(0, 1, by = 0.1)
 obs <- rnorm(50)
 dnorm_post(x, obs)
 pnorm_post(x, obs)
+qnorm_post(seq(0.1, 0.9, by = 0.1), obs)
 
 # Random numbers can also be generated
 rnorm_post(5, obs)
