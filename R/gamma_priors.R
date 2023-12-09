@@ -42,6 +42,9 @@ update_gamma_parameters <- function(
 #'
 #' `pgamma_post()` computes the posterior CDF for a model with a gamma prior.
 #'
+#' `qgamma_post()` computes the quantile for a given probability from a model
+#' with a gamma prior.
+#'
 #' `rgamma_post()` generates random numbers from the posterior distribution from
 #' a model with a gamma prior.
 #'
@@ -60,9 +63,10 @@ update_gamma_parameters <- function(
 #'
 #' @examples
 #'
-#' x <- seq(0, 1, 10)
+#' x <- seq(0, 1, by = 0.1)
 #' dgamma_post(x, 10, 100, "pois")
 #' pgamma_post(x, 10, 100, "pois")
+#' qgamma_post(x, 10, 100, "pois")
 #'
 #' # Random numbers can also be generated
 #' rgamma_post(5, 10, 100, "pois")
