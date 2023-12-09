@@ -40,6 +40,18 @@ test_that("pgamma_post works", {
                pgamma(2, 0 + sum(OBS), 0 + s_size, log = TRUE))
 })
 
+test_that("qgamma_post works", {
+  s_size <- 10
+  OBS <- sample(1:5, s_size, TRUE)
+  expect_equal(qgamma_post(0.5, OBS, s_size, "exp"),
+               qgamma(0.5, 0 + sum(OBS), 0 + s_size))
+  expect_length(
+    qgamma_post(seq(0.2, 0.5, by = 0.1), OBS, s_size, "exp"), length(2:5)
+    )
+  expect_equal(qgamma_post(-2, OBS, s_size, "exp", log.p = TRUE),
+               qgamma(-2, 0 + sum(OBS), 0 + s_size, log.p = TRUE))
+})
+
 test_that("rgamma_post works", {
   s_size <- 10
   OBS <- sample(1:5, s_size, TRUE)
