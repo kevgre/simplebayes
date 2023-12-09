@@ -34,7 +34,7 @@ initialize_priors <- function(Y, X, g_frac, b_prior, v_prior) {
 #' @returns A vector of posterior variance values
 variance_post <- function(Y, X, iters, g, mu_prior, s2_prior) {
   g_frac <- g / (1 + g)
-  hat_matrix <- X %*% tcrossprod(solve(crossprod(X)), X)
+  hat_matrix <- X %*% tcrossprod(solve(Matrix::nearPD(crossprod(X))$mat), X)
   SSRg <- crossprod(Y, diag(g) - g_frac * hat_matrix) %*% Y
   1 / stats::rgamma(iters, (mu_prior + g) / 2, (s2_prior * mu_prior + SSRg) / 2)
 }
