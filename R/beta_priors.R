@@ -95,7 +95,7 @@ qbeta_post <- function(
   post_vals <- update_beta_parameters(
     alpha_prior, beta_prior, likelihood, result, sample_size, failure_rate
   )
-  stats::pbeta(percentile, post_vals[1], post_vals[2], ...)
+  stats::qbeta(percentile, post_vals[1], post_vals[2], ...)
 }
 
 #' @rdname dbeta_post
