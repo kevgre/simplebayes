@@ -111,6 +111,10 @@ bayes_lm <- function(
     x, iterations, g, priors$beta_prior, variance_posterior
   )
   out <- t(rbind(beta_out, variance_posterior))
+  if (length(colnames(x = x)) != 0) {
+    colnames(out) <- c(colnames(x), "variance")
+  } else {
   colnames(out) <- c(paste0("beta", seq_along(priors$beta_prior)), "variance")
+  }
   out
 }
