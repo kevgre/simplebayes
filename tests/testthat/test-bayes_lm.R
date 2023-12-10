@@ -54,4 +54,8 @@ test_that("bayes_lm works", {
   expect_error(bayes_lm(Y, X, iterations = -100))
   expect_error(bayes_lm(Y, X, beta_prior = runif(9, 0, 4)))
   expect_equal(dim(bayes_lm(Y, X, iterations = 100)), c(100, ncol(X) + 1))
+  colnames(X) <- paste0("name", seq_len(ncol(X)))
+  expect_equal(
+    colnames(bayes_lm(Y, X, iterations = 100)), c(colnames(X), "variance")
+    )
 })
