@@ -119,6 +119,29 @@ bayes_lm <- function(
   out
 }
 
+#' Linear Regression Credible Intervals
+#'
+#' `credible_intervals()` computes the credible interval for each parameter in a
+#' model created by `bayes_lm()`.
+#'
+#' @param posterior_values The result from `bayes_lm()`
+#' @param ... Placeholder for future capabilities. Currently ignored
+#' @param level The level for the interval
+#'
+#' @returns A matrix showing the credible intervals
+#' @export
+#'
+#' @examples
+#' # Simulate data
+#' X <- matrix(rnorm(1000, 5, 2), nrow = 100)
+#' betas <- runif(10, -2, 2)
+#' Y <- X %*% betas + rnorm(100, 0, 3)
+#'
+#' # Perform Bayesian Linear Regression
+#' linear_model <- bayes_lm(Y, X, iterations = 10)
+#'
+#' # Compute credible intervals
+#' credible_intervals(linear_model)
 credible_itervals <- function(posterior_values, ..., level = 0.9) {
   exclusion_level <- 1 - level
   probabilities <- c(exclusion_level/2, 1 - exclusion_level/2)
