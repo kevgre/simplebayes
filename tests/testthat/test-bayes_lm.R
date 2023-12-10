@@ -65,10 +65,10 @@ test_that("credible intervals compute", {
   X <- matrix(rnorm(1000, 2, 3), nrow = 100)
   out <- bayes_lm(Y, X, iterations = 100)
   expect_equal(
-    credible_itervals(out), apply(out, 2, quantile, prob = c(0.05, 0.95))
+    credible_intervals(out), apply(out, 2, quantile, prob = c(0.05, 0.95))
     )
   expect_equal(
-    credible_itervals(out, level = 0.95),
+    credible_intervals(out, level = 0.95),
     apply(out, 2, quantile, prob = c(0.025, 0.975))
     )
 })

@@ -75,7 +75,7 @@ traceplot(posterior)
 In these trace plots, we can see that each of the variables had good mixing and that all of the posterior space was explored. With this, we will look at the credible intervals for each variable.
 
 ```{r cred_ints}
-credible_itervals(posterior, level = 0.9)
+credible_intervals(posterior, level = 0.9)
 ```
 
 From these intervals, we can see that the only significant variables are the number of infant deaths, the total government expenditure on health, the number of deaths per 1000 live births due to HIV/AIDS (0 - 4 years), the prevalence of thinnes in children ages 10 to 19, the prevalence of thinness in children age 5 to 9, the Human Development Index in terms of income composition of resources, the number of years in school, and the development level of the country.

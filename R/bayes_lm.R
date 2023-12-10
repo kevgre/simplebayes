@@ -142,7 +142,7 @@ bayes_lm <- function(
 #'
 #' # Compute credible intervals
 #' credible_intervals(linear_model)
-credible_itervals <- function(posterior_values, ..., level = 0.9) {
+credible_intervals <- function(posterior_values, ..., level = 0.9) {
   exclusion_level <- 1 - level
   probabilities <- c(exclusion_level/2, 1 - exclusion_level/2)
   apply(posterior_values, 2, stats::quantile, prob = probabilities)
