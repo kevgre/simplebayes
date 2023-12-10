@@ -59,3 +59,16 @@ test_that("bayes_lm works", {
     colnames(bayes_lm(Y, X, iterations = 100)), c(colnames(X), "variance")
     )
 })
+
+test_that("credible intervals compute", {
+  Y <- rnorm(100, 1, 3)
+  X <- matrix(rnorm(1000, 2, 3), nrow = 100)
+  out <- bayes_lm(Y, X, iterations = 100)
+  expect_equal(
+    credible_itervals(out), apply(out, 2, quantile, prob = c(0.05, 0.95))
+    )
+  expect_equal(
+    credible_itervals(out, level = 0.95),
+    apply(out, 2, quantile, prob = c(0.025, 0.975))
+    )
+})
