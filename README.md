@@ -4,6 +4,9 @@
 # simplebayes
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/kevgre/simplebayes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/kevgre/simplebayes?branch=main)
 <!-- badges: end -->
 
 The goal of simplebayes is to allow the user to perform simple tasks in
