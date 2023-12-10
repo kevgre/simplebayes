@@ -57,7 +57,7 @@ test_that("bayes_lm works", {
   colnames(X) <- paste0("name", seq_len(ncol(X)))
   expect_equal(
     colnames(bayes_lm(Y, X, iterations = 100)), c(colnames(X), "variance")
-    )
+  )
 })
 
 test_that("credible intervals compute", {
@@ -66,9 +66,9 @@ test_that("credible intervals compute", {
   out <- bayes_lm(Y, X, iterations = 100)
   expect_equal(
     credible_intervals(out), apply(out, 2, quantile, prob = c(0.05, 0.95))
-    )
+  )
   expect_equal(
     credible_intervals(out, level = 0.95),
     apply(out, 2, quantile, prob = c(0.025, 0.975))
-    )
+  )
 })

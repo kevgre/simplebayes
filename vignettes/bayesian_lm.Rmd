@@ -52,8 +52,8 @@ unwanted_columns <- c("Country", "Status", "Year", "Life.expectancy")
 inputs <- as.matrix(
   life_expectancy[
     !(colnames(life_expectancy) %in% unwanted_columns)
-    ]
-  )
+  ]
+)
 ```
 
 With our independent and dependent variables separated, we can move on to perform the linear regression. The bayes_lm function already has the Jefferys Priors as default priors, so we will use those assumptions.

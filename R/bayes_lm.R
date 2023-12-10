@@ -114,7 +114,7 @@ bayes_lm <- function(
   if (length(colnames(x = x)) != 0) {
     colnames(out) <- c(colnames(x), "variance")
   } else {
-  colnames(out) <- c(paste0("beta", seq_along(priors$beta_prior)), "variance")
+    colnames(out) <- c(paste0("beta", seq_along(priors$beta_prior)), "variance")
   }
   out
 }
@@ -144,6 +144,6 @@ bayes_lm <- function(
 #' credible_intervals(linear_model)
 credible_intervals <- function(posterior_values, ..., level = 0.9) {
   exclusion_level <- 1 - level
-  probabilities <- c(exclusion_level/2, 1 - exclusion_level/2)
+  probabilities <- c(exclusion_level / 2, 1 - exclusion_level / 2)
   apply(posterior_values, 2, stats::quantile, prob = probabilities)
 }
