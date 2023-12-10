@@ -15,5 +15,68 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+library(tidyverse)
 library(simplebayes)
 ```
+
+## Introduction
+
+Linear regression is one of the most common applications of Bayesian statistics. As such, simplebayes has the capbility to do this. In this vignette, we will be using the Life Expectancy data from the World Health Organization that is found on kaggle.com. This data has been cleaned to show only the countries without any missing values in 2012. The beginning of this data is shown below:
+
+```{r show_data}
+knitr::kable(head(life_expectancy), caption = "2012 Life Expectancies")
+```
+
+
+## Build Model
+
+The first thing to notice about this data is that the development status and countries are character strings. To use the bayes_lm function in simplebayes, the inputs must all be numeric. To accommodate this, the first thing we will do is create two new index columns that correspond to the development level and country columns as follows:
+
+```{r create_indecies}
+country_index <- seq_along(unique(life_expectancy$Country))
+development_index <- ifelse(life_expectancy$Status == "Developed", 1, 2)
+
+life_expectancy$country_index <- country_index
+life_expectancy$development_index <- development_index
+```
+
+Next, we will separate life expectancy from the the input values.
+
+```{r extract_outputs}
+expectancies <- life_expectancy$Life.expectancy
+```
+
+Now, we can make a matrix that has all of the input variables, which is all of the columns except for country, status, year, and life expectancy. The following code shows how this is to be done:
+
+```{r find_inputs}
+unwanted_columns <- c("Country", "Status", "Year", "Life.expectancy")
+inputs <- as.matrix(
+  life_expectancy[
+    !(colnames(life_expectancy) %in% unwanted_columns)
+    ]
+  )
+```
+
+With our independent and dependent variables separated, we can move on to perform the linear regression. The bayes_lm function already has the Jefferys Priors as default priors, so we will use those assumptions.
+
+```{r compute_model}
+posterior <- bayes_lm(expectancies, inputs, iterations = 10000)
+```
+
+## Diagnostics
+
+Now that we have posterior values. We can perform some diagnostics on the results. First, we will look at the traceplots, which can be done using the simplebayes function traceplot.
+
+```{r traceplots, fig.width=10, fig.height=7}
+traceplot(posterior)
+```
+
+## Results
+
+In these trace plots, we can see that each of the variables had good mixing and that all of the posterior space was explored. With this, we will look at the credible intervals for each variable.
+
+```{r cred_ints}
+credible_itervals(posterior, level = 0.9)
+```
+
+From these intervals, we can see that the only significant variables are the number of infant deaths, the total government expenditure on health, the number of deaths per 1000 live births due to HIV/AIDS (0 - 4 years), the prevalence of thinnes in children ages 10 to 19, the prevalence of thinness in children age 5 to 9, the Human Development Index in terms of income composition of resources, the number of years in school, and the development level of the country.
