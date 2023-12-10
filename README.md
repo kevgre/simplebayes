@@ -17,8 +17,7 @@ itself.
 
 ## Installation
 
-You can install the development version of simplebayes from
-[GitHub](https://github.com/) with:
+You can install simplebayes from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
