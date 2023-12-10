@@ -118,3 +118,9 @@ bayes_lm <- function(
   }
   out
 }
+
+credible_itervals <- function(posterior_values, ..., level = 0.9) {
+  exclusion_level <- 1 - level
+  probabilities <- c(exclusion_level/2, 1 - exclusion_level/2)
+  apply(posterior_values, 2, quantile, prob = probabilities)
+}
